@@ -17,7 +17,7 @@ export interface RailSwitchCustomEvent<T> extends CustomEvent<T> {
 }
 declare global {
     interface HTMLRailSwitchElementEventMap {
-        "onDrop": "left" | "right";
+        "drop": "left" | "right";
     }
     interface HTMLRailSwitchElement extends Components.RailSwitch, HTMLStencilElement {
         addEventListener<K extends keyof HTMLRailSwitchElementEventMap>(type: K, listener: (this: HTMLRailSwitchElement, ev: RailSwitchCustomEvent<HTMLRailSwitchElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -40,7 +40,7 @@ declare global {
 declare namespace LocalJSX {
     interface RailSwitch {
         "doFlash"?: boolean;
-        "onOnDrop"?: (event: RailSwitchCustomEvent<"left" | "right">) => void;
+        "onDrop"?: (event: RailSwitchCustomEvent<"left" | "right">) => void;
         "styles"?: { track: string; targets: { left: string; switch: string; switchFlash: string; right: string; }; };
     }
     interface IntrinsicElements {

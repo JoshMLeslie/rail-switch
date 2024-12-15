@@ -18,7 +18,7 @@ export class RailSwitch {
       right: "green",
     },
   };
-  @Event() onDrop: EventEmitter<"left" | "right">;
+  @Event() drop: EventEmitter<"left" | "right">;
 
   dsRef: DragSelect<HTMLElement> = null;
 
@@ -107,7 +107,7 @@ export class RailSwitch {
 
     if (targetSelected) {
       console.debug("dropped on", targetSelected);
-      this.onDrop.emit(targetSelected);
+      this.drop.emit(targetSelected);
       if (this.doFlash) {
         await this._doFlash();
       }
