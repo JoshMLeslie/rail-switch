@@ -2,7 +2,10 @@
 <html dir="ltr" lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
+    />
     <title>Stencil Component Starter</title>
 
     <script type="module" src="/build/rail-switch.esm.js"></script>
@@ -10,5 +13,12 @@
   </head>
   <body>
     <rail-switch></rail-switch>
+    <script>
+      // https://stenciljs.com/docs/events
+      const railSwitchEl = document.querySelector("rail-switch");
+      railSwitchEl.addEventListener("onDrop", ({ detail }) => {
+        console.log(detail);
+      });
+    </script>
   </body>
 </html>

@@ -8,12 +8,26 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface RailSwitch {
         "doFlash": boolean;
-        "onDrop": (side: "left" | "right") => any;
         "styles": { track: string; targets: { left: string; switch: string; switchFlash: string; right: string; }; };
     }
 }
+export interface RailSwitchCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLRailSwitchElement;
+}
 declare global {
+    interface HTMLRailSwitchElementEventMap {
+        "onDrop": "left" | "right";
+    }
     interface HTMLRailSwitchElement extends Components.RailSwitch, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLRailSwitchElementEventMap>(type: K, listener: (this: HTMLRailSwitchElement, ev: RailSwitchCustomEvent<HTMLRailSwitchElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLRailSwitchElementEventMap>(type: K, listener: (this: HTMLRailSwitchElement, ev: RailSwitchCustomEvent<HTMLRailSwitchElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLRailSwitchElement: {
         prototype: HTMLRailSwitchElement;
@@ -26,7 +40,7 @@ declare global {
 declare namespace LocalJSX {
     interface RailSwitch {
         "doFlash"?: boolean;
-        "onDrop"?: (side: "left" | "right") => any;
+        "onOnDrop"?: (event: RailSwitchCustomEvent<"left" | "right">) => void;
         "styles"?: { track: string; targets: { left: string; switch: string; switchFlash: string; right: string; }; };
     }
     interface IntrinsicElements {

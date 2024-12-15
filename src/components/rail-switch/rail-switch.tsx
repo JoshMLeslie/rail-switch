@@ -1,4 +1,4 @@
-import { Component, Prop, h } from "@stencil/core";
+import { Component, Event, EventEmitter, Prop, h } from "@stencil/core";
 import DragSelect from "dragselect";
 import { isOnTarget, moveInRadiusBoundary } from "../../utils/utils";
 
@@ -8,7 +8,6 @@ import { isOnTarget, moveInRadiusBoundary } from "../../utils/utils";
   shadow: true,
 })
 export class RailSwitch {
-  @Prop() onDrop: (side: "left" | "right") => any = console.log;
   @Prop() doFlash = true;
   @Prop() styles = {
     track: "goldenrod",
@@ -19,6 +18,7 @@ export class RailSwitch {
       right: "green",
     },
   };
+  @Event() onDrop: EventEmitter<"left" | "right">;
 
   dsRef: DragSelect<HTMLElement> = null;
 
@@ -107,7 +107,7 @@ export class RailSwitch {
 
     if (targetSelected) {
       console.debug("dropped on", targetSelected);
-      this.onDrop(targetSelected);
+      this.onDrop.emit(targetSelected);
       if (this.doFlash) {
         await this._doFlash();
       }
