@@ -7,7 +7,9 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface RailSwitch {
-        "styles": { track: string; target: { left: string; actor: string; right: string; }; };
+        "doFlash": boolean;
+        "onDrop": (side: "left" | "right") => any;
+        "styles": { track: string; targets: { left: string; switch: string; switchFlash: string; right: string; }; };
     }
 }
 declare global {
@@ -23,7 +25,9 @@ declare global {
 }
 declare namespace LocalJSX {
     interface RailSwitch {
-        "styles"?: { track: string; target: { left: string; actor: string; right: string; }; };
+        "doFlash"?: boolean;
+        "onDrop"?: (side: "left" | "right") => any;
+        "styles"?: { track: string; targets: { left: string; switch: string; switchFlash: string; right: string; }; };
     }
     interface IntrinsicElements {
         "rail-switch": RailSwitch;

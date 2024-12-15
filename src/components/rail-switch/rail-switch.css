@@ -9,7 +9,7 @@
 
   --container-height: 100px;
   --container-width: 200px;
-  
+
   --action-size: 48px;
   --target-size: 32px;
   --radius-thickness: 8px;
@@ -47,35 +47,36 @@
   height: calc(100% + calc(var(--radius-thickness) * 1.5));
   left: calc(50% - calc(var(--action-size) / 2));
   transform: rotate(0deg);
-  animation: transform 100ms ease-in-out;
 }
-#drag-switch-container div {
+
+#drag-switch {
   height: var(--action-size);
   width: var(--action-size);
   border-radius: calc(var(--action-size) / 2);
   cursor: grab;
+  transition: background-color 50ms ease-in-out;
 }
-#drag-switch-container.ds-selected div {
+#drag-switch.ds-selected {
   cursor: grabbing;
 }
 
-#left-target,
-#right-target {
+#left-target-container,
+#right-target-container {
   width: var(--target-size);
   height: calc(100% + var(--radius-thickness) / 2);
   left: calc(50% - calc(var(--target-size) / 2));
 }
 
-#left-target div,
-#right-target div {
+#left-target,
+#right-target {
   height: var(--target-size);
   width: var(--target-size);
   border-radius: calc(var(--target-size) / 2);
 }
 
-#left-target {
+#left-target-container {
   transform: rotate(calc(-1 * var(--rotation-offset)));
 }
-#right-target {
+#right-target-container {
   transform: rotate(var(--rotation-offset));
 }

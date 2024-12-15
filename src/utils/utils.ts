@@ -3,38 +3,54 @@
  * where the circle is at center [h, k] and has a radius r.
  */
 
+const CSS_TARGET_OFFSET = 8;
 /**
+ * ! el should be immediate child of its bounding-box container !
+ * 
  * where the raw .offsetXY coords are
  *   -y
  * -x   x
  *    y
  */
-const CSS_TARGET_OFFSET = 8;
 export const moveInRadiusBoundary = (
-  element: HTMLElement,
-  event: MouseEvent,
-  outerRadius: number,
-  boundaryWidth = 8 // subtractive width, in px
+  el: HTMLElement,
+  event: MouseEvent
 ) => {
-  if (outerRadius === 0 || boundaryWidth === 0) {
-    throw ReferenceError("Radius must be non-zero");
-  }
-  const parentEl = element.parentElement.getBoundingClientRect();
+  const containerEl = el.parentElement.getBoundingClientRect();
 
-  const zeroY = parentEl.height;
-  const zeroX = parentEl.width / 2;
+  const zeroY = containerEl.height;
+  const zeroX = containerEl.width / 2;
 
   const { x, y } = { x: event.offsetX, y: event.offsetY };
   const testY = y - zeroY; // y is negative.... because it works.
   const testX = x - zeroX;
 
   const deltaRads = Math.atan2(testY, testX);
-  const quarterOffset = Math.PI / 2;
+  const quarterOffset = Math.PI / 2; // more coordinate mapping nonsense
+  const useRads = deltaRads + quarterOffset;
 
   const withinBBox =
-    testY < -CSS_TARGET_OFFSET && testY > -zeroY && testX > -zeroX && testX < zeroX;
+    testY < -CSS_TARGET_OFFSET &&
+    testY > -zeroY &&
+    testX > -zeroX &&
+    testX < zeroX;
 
   if (withinBBox) {
-    element.style.transform = `rotate(${deltaRads + quarterOffset}rad`;
+    el.style.transform = `rotate(${useRads}rad`;
   }
+};
+
+export const isOnTarget = (test: HTMLElement, target: HTMLElement): boolean => {
+  const testRect = test.getBoundingClientRect();
+  const targetRect = target.getBoundingClientRect();
+
+  const centerX = (testRect.left + testRect.right) / 2;
+  const centerY = (testRect.top + testRect.bottom) / 2;
+
+  const xWithinTarget =
+    centerX >= targetRect.left && centerX <= targetRect.right;
+  const yWithinTarget =
+    centerY >= targetRect.top && centerY <= targetRect.bottom;
+
+  return xWithinTarget && yWithinTarget;
 };
