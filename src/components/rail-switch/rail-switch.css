@@ -1,0 +1,81 @@
+:host {
+  display: block;
+  width: fit-content;
+  border: 2px solid black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  --container-height: 100px;
+  --container-width: 200px;
+  
+  --action-size: 48px;
+  --target-size: 32px;
+  --radius-thickness: 8px;
+  --rotation-offset: 70deg;
+}
+
+#rail-switch-container {
+  width: var(--container-width);
+  height: var(--container-height);
+  position: relative;
+}
+
+#background-track {
+  position: absolute;
+  top: var(--radius-thickness);
+  right: var(--radius-thickness);
+  bottom: 0; /* hide it peeking out */
+  left: var(--radius-thickness);
+  background-color: transparent;
+  border-top-left-radius: 1000px;
+  border-top-right-radius: 1000px;
+  border-width: var(--radius-thickness);
+  box-sizing: border-box;
+  border-style: solid;
+  border-bottom: 0;
+}
+
+.drag-target-container {
+  position: absolute;
+  bottom: 0;
+  transform-origin: bottom center;
+}
+#drag-switch-container {
+  width: var(--action-size);
+  height: calc(100% + calc(var(--radius-thickness) * 1.5));
+  left: calc(50% - calc(var(--action-size) / 2));
+  transform: rotate(0deg);
+  animation: transform 100ms ease-in-out;
+}
+#drag-switch-container div {
+  height: var(--action-size);
+  width: var(--action-size);
+  border-radius: calc(var(--action-size) / 2);
+  cursor: grab;
+}
+#drag-switch-container.ds-selected div {
+  cursor: grabbing;
+}
+
+#left-target,
+#right-target {
+  width: var(--target-size);
+  height: calc(100% + var(--radius-thickness) / 2);
+  left: calc(50% - calc(var(--target-size) / 2));
+}
+
+#left-target div,
+#right-target div {
+  height: var(--target-size);
+  width: var(--target-size);
+  border-radius: calc(var(--target-size) / 2);
+}
+
+#left-target {
+  transform: rotate(calc(-1 * var(--rotation-offset)));
+}
+#right-target {
+  transform: rotate(var(--rotation-offset));
+}

@@ -6,56 +6,34 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface RailSwitch {
+        "styles": { track: string; target: { left: string; actor: string; right: string; }; };
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLRailSwitchElement extends Components.RailSwitch, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLRailSwitchElement: {
+        prototype: HTMLRailSwitchElement;
+        new (): HTMLRailSwitchElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "rail-switch": HTMLRailSwitchElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface RailSwitch {
+        "styles"?: { track: string; target: { left: string; actor: string; right: string; }; };
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "rail-switch": RailSwitch;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "rail-switch": LocalJSX.RailSwitch & JSXBase.HTMLAttributes<HTMLRailSwitchElement>;
         }
     }
 }
