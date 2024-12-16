@@ -26,12 +26,7 @@ export class RailSwitch {
   dragSwitchRef: HTMLElement = null;
   leftTargetRef: HTMLElement = null;
   rightTargetRef: HTMLElement = null;
-
   componentDidLoad() {
-    if (!this.switchContainerRef) {
-      throw ReferenceError("container ref is not defined!");
-    }
-
     this.dsRef = new DragSelect({
       area: this.switchContainerRef, // isolates listener to container
       selectables: this.dragSwitchRef,
