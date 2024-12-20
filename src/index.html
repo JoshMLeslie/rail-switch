@@ -12,7 +12,22 @@
     <script nomodule src="/build/rail-switch.js"></script>
   </head>
   <body>
-    <rail-switch></rail-switch>
+    <style>
+      #example-mobile-container {
+        width: 450px;
+        height: 100vh;
+        border: 2px solid black;
+        border-radius: 16px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+      }
+    </style>
+    <div id="example-mobile-container">
+      <rail-switch></rail-switch>
+    </div>
     <script>
       // https://stenciljs.com/docs/events
       const railSwitchEl = document.querySelector("rail-switch");
