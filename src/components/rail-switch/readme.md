@@ -15,9 +15,9 @@
 
 ## Events
 
-| Event    | Description | Type                             |
-| -------- | ----------- | -------------------------------- |
-| `onDrop` |             | `CustomEvent<"left" \| "right">` |
+| Event  | Description | Type                             |
+| ------ | ----------- | -------------------------------- |
+| `drop` |             | `CustomEvent<"left" \| "right">` |
 
 
 ----------------------------------------------
